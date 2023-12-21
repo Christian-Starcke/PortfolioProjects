@@ -15,7 +15,7 @@ ORDER By 3,4
 
 
 
--- Select Data that we are going to be using
+-- Selection of Data
 SELECT Location, date, total_cases, new_cases, total_deaths, population
 FROM PortfolioProject.dbo.CovidDeaths
 ORDER By 1,2
@@ -47,7 +47,7 @@ ORDER BY
     1, 2;
 
 
--- Can also do:
+-- Another way of looking at it
 SELECT Location, ConvertedDate, ConvertedTotalCases, ConvertedTotalDeaths, (ConvertedTotalDeaths/ConvertedTotalCases)*100 as DeathPercentage
 FROM #TempCovidDeaths
 WHERE Location like '%states%'
@@ -83,7 +83,7 @@ ORDER BY TotalDeathCount desc
 
 
 
--- LET'S BREAK THINGS DOWN BY CONTINENT
+-- Breaking down by Continent
 -- Correct Way Below for SQL but won't really work for a Drill Down in Tableau/PowerBI
 SELECT location, MAX(cast(ConvertedTotalDeaths as int)) as TotalDeathCount
 FROM #TempCovidDeaths
@@ -118,7 +118,7 @@ ORDER BY
     1,2
 
 
--- And this way 
+-- Another way this works
 SELECT  
     SUM(CAST(new_cases AS int)) AS total_cases,  -- Convert new_cases to int before summing
     SUM(CAST(new_deaths AS int)) AS total_deaths, -- Convert new_deaths to int before summing
@@ -132,7 +132,7 @@ ORDER BY
 
 
 
---USING CTE:
+--USING CTE's:
 WITH PopvsVac (continent, location, date, population, New_Vaccinations, RollingPeopleVaccinated)
 as
 (
@@ -155,7 +155,7 @@ FROM PopvsVac
 
 
 
--- USING Temp Table
+-- USING Temp Table instead of CTE
 DROP Table if exists #PercentagePopulationVaccinated
 INSERT INTO #PercentPopulationVaccinated
 SELECT 
